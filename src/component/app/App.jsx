@@ -20,13 +20,19 @@ constructor(props){
       }
 
       this.onStartgame=this.onStartgame.bind(this);
-      this.onHandleChange=this.handleChange.bind(this);
+      this.quizFinished=this.quizFinished.bind(this);
     }
 
   onStartgame(e) {
     this.setState({user:e,page:"QuizPage"});
 
-    console.log(this.state.user);
+
+
+  }
+
+  quizFinished(e){
+    console.log(e);
+    this.setState({score:e,page:"ScorePage"})
 
   }
 
@@ -49,7 +55,7 @@ constructor(props){
     if(this.state.page==="LandingPage"){
       page = <LandingPage onStartgame={this.onStartgame}/> ;
     }else if (this.state.page==="QuizPage") {
-      page = <QuizPage />
+      page = <QuizPage quizFinished={this.quizFinished} />
 
     }else if(this.state.page==="ScorePage"){
       page = <ScorePage />

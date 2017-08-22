@@ -15,7 +15,7 @@ class ScorePage extends React.Component {
           <div className="col-sm-4">
             <div className="card">
               <div className="card-block">
-                <h3 className="card-title">You'r Score:</h3>
+                <h3 className="card-title">Your Score:</h3>
                 <p className="card-text text-danger" id="scoreText">10/10</p>
               </div>
             </div>
@@ -23,7 +23,7 @@ class ScorePage extends React.Component {
           <div className="col-sm-8">
             <div className="card">
               <div className="card-block">
-                <h3 className="card-title">Leader Bored</h3>
+                <h3 className="card-title">Leader board</h3>
                 <table className="table table-striped">
                   <thead>
                     <tr >
