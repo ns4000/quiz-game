@@ -29,11 +29,11 @@ handleLeaderBoard(){
 handleComponentRender(){
 let tempLeaderBord = JSON.parse(localStorage.getItem("leaderBoard"));
 
-let tempcom = tempLeaderBord.map((userleader)=>{
+let tempcom = tempLeaderBord.map((userleader,index)=>{
 
   return (
   <tr>
-    <th scope="row">1</th>
+    <th scope="row">{index}</th>
     <td>{userleader.user}</td>
     <td>{userleader.score}/10</td>
   </tr> )})
