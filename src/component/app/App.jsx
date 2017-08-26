@@ -16,7 +16,7 @@ constructor(props){
       user:'null',
       page:'LandingPage',
       score:0,
-      leaderBoard:(localStorage.getItem("leaderBoard")!=null? JSON.parse(localStorage.getItem('leaderBoard')):[]),
+      //leaderBoard:(localStorage.getItem("leaderBoard")!=null? JSON.parse(localStorage.getItem('leaderBoard')):[]),
       questionArr:[]
       }
 

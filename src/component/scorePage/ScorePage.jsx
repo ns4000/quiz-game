@@ -10,33 +10,38 @@ class ScorePage extends React.Component {
     currScore:this.props.score,
     }
     this.handleLeaderBoard=this.handleLeaderBoard.bind(this);
-  //  this.handleComponentRender=this.handleComponentRender.bind(this);
-
   }
 
-//setting up the local storage with current user and score then sort and adding them to the app State
+//setting up the local storage with current user and score then sort and adding them to the app State up to 5 rows
 handleLeaderBoard(){
-  let tempLeaderBord= {score:this.state.currScore,user:this.state.currUser};
-  this.props.leaderBoard.push(tempLeaderBord);
-  if(this.props.leaderBoard.length>1)
-  this.props.leaderBoard.sort(function (a, b) {return b.score - a.score});
-  let leaderBoardString = JSON.stringify(this.props.leaderBoard);
-  localStorage.setItem("leaderBoard",leaderBoardString);
+  let leaderBoardObj= {score:this.state.currScore,user:this.state.currUser};
+  if(localStorage.getItem("leaderBoard")===null)//checking if the localStorage is empty and if so init with current user and scroe
+      {
+        localStorage.setItem("leaderBoard",JSON.stringify([leaderBoardObj]));
+      }
+    else {
+      let temp =JSON.parse(localStorage.getItem("leaderBoard"));
+      if(temp.length>0){//when we have more than 2 row in the leader board sort them by high score then clip them by 5 rows max
+         temp.push(leaderBoardObj);
+         temp.sort(function (a, b) {return b.score - a.score});
+         let temp1= temp.slice(0,5);
+         localStorage.setItem("leaderBoard",JSON.stringify(temp1));
+        }
+      }//else end
+}//end of handleLeaderBoard
 
-}
 
-
-handleComponentRender(){
-let tempLeaderBord = JSON.parse(localStorage.getItem("leaderBoard"));
-
-let tempcom = tempLeaderBord.map((userleader,index)=>{
-
+handleLeaderBoardComponent(){
+let leaderBoardObj = JSON.parse(localStorage.getItem("leaderBoard"));
+let tempcom = leaderBoardObj.map((userleader,index)=>{
   return (
-  <tr>
-    <th scope="row">{index}</th>
-    <td>{userleader.user}</td>
-    <td>{userleader.score}/10</td>
-  </tr> )})
+              <tr>
+                <th scope="row">{index+1}</th>
+                <td>{userleader.user}</td>
+                <td>{userleader.score}/10</td>
+              </tr>
+            )
+          });
 
 return  tempcom;
 
@@ -73,7 +78,7 @@ render() {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.handleComponentRender()}
+                  {this.handleLeaderBoardComponent()}
                 </tbody>
               </table>
 
