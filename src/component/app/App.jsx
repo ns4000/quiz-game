@@ -5,9 +5,6 @@ import LandingPage from '../landingPage/LandingPage.jsx';
 import ScorePage from '../scorePage/ScorePage.jsx';
 import QuizPage from '../quizPage/QuizPage.jsx';
 
-
-
-
 class App extends Component {
 
 constructor(props){
@@ -56,7 +53,6 @@ constructor(props){
     }else if (this.state.page==="QuizPage") {
       page = <QuizPage quizFinished={this.quizFinished}
         questionArr={this.state.questionArr} />
-
     }else if(this.state.page==="ScorePage"){
       page = <ScorePage
         user={this.state.user}
@@ -64,8 +60,8 @@ constructor(props){
         leaderBoard={this.state.leaderBoard}
         tryAgain={this.tryAgain}
         newGame={this.newGame}/>
-
     }
+
     return (
       <div className='App'>
         {page}
