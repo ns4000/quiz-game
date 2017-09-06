@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 import LandingPage from '../landingPage/LandingPage.jsx';
@@ -63,9 +64,11 @@ constructor(props){
     }
 
     return (
+      <MuiThemeProvider>
       <div className='App'>
         {page}
       </div>
+    </MuiThemeProvider>
     );
   }
 }

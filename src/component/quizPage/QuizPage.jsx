@@ -22,7 +22,7 @@ handleValidate(answer){
 
     }else if(!answer && this.props.questionArr[this.state.question-1].correct_answer==="False"){
       newScore++;
-      }
+    }
     this.setState({question:currentQuestion+1,score:newScore})
 
 
