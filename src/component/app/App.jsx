@@ -5,6 +5,7 @@ import './App.css';
 import LandingPage from '../landingPage/LandingPage.jsx';
 import ScorePage from '../scorePage/ScorePage.jsx';
 import QuizPage from '../quizPage/QuizPage.jsx';
+import Nav from '../nav/Nav.jsx';
 
 class App extends Component {
 
@@ -65,8 +66,9 @@ constructor(props){
 
     return (
       <MuiThemeProvider>
-      <div className='App'>
-        {page}
+        <div className='App'>
+        <Nav onStartgame={this.onStartgame}/>
+         {/*page*/}
       </div>
     </MuiThemeProvider>
     );
