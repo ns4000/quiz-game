@@ -18,7 +18,7 @@ constructor(props){
         <input className="form-control text-center" type="text"      placeholder="Enter user name or enter as guest" onChange={(e)=>this.setState({user:e.target.value})} required/>
         <input className="form-control btn-success" type="submit"    defaultValue="Start Quiz"/>
 
-        <RaisedButton label="Start Quiz" backgroundColor='#66BB6A'  fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame(this.state.user)}}  />
+        
         <RaisedButton label="Guest" backgroundColor='#FFA726' fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame("Guest")}} />
       </form>)
     }else if(this.state.configtoggled===true){
