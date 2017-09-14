@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Route,Link} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 import LandingPage from '../landingPage/LandingPage.jsx';
 import ScorePage from '../scorePage/ScorePage.jsx';
 import QuizPage from '../quizPage/QuizPage.jsx';
+import TabsExampleSwipeable from '../nav/Nav.jsx';
 
 class App extends Component {
 
@@ -64,11 +66,11 @@ constructor(props){
     }
 
     return (
-      <MuiThemeProvider>
-      <div className='App'>
-        {page}
-      </div>
-    </MuiThemeProvider>
+        <MuiThemeProvider>
+          <div className='App'>
+            <TabsExampleSwipeable onStartgame={this.onStartgame}/>
+          </div>
+      </MuiThemeProvider>
     );
   }
 }
