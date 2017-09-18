@@ -1,5 +1,5 @@
 .App {
-  margin-top: 11%;
+  margin-top: 6%;
   text-align: center;
 }
 
@@ -22,4 +22,9 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+.style-override> div>div> div{
+  padding-right:0 !important;
 }

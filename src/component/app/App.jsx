@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SwipeableViews from 'react-swipeable-views';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import './App.css';
 
 import LandingPage from '../landingPage/LandingPage.jsx';
 import ScorePage from '../scorePage/ScorePage.jsx';
 import QuizPage from '../quizPage/QuizPage.jsx';
+// import Nav from '../nav/Nav.jsx';
+
+
+const styles = {
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+  slide: {  padding: 10,},
+};
 
 class App extends Component {
 
@@ -14,7 +28,7 @@ constructor(props){
       user:'null',
       page:'LandingPage',
       score:0,
-      //leaderBoard:(localStorage.getItem("leaderBoard")!=null? JSON.parse(localStorage.getItem('leaderBoard')):[]),
+      slideIndex: 0,
       questionArr:[]
       }
 
@@ -32,29 +46,37 @@ constructor(props){
         e.question= unescape(e.question);
         return e;
       });
-      this.setState({user:user,page:"QuizPage",questionArr:questionArr});
+      this.setState({user:user,page:"QuizPage",questionArr:questionArr,slideIndex: 1});
+
+
     })
   }
 
   quizFinished(e){
-    this.setState({score:e,page:"ScorePage"})
+    this.setState({score:e,page:"ScorePage",slideIndex: 2})
 
   }
   tryAgain(){
-    this.setState({page:"QuizPage",score:0})
+    this.setState({page:"QuizPage",score:0,slideIndex: 1})
   }
   newGame(){
-    this.setState({page:"LandingPage",score:0,user:""})
+    this.setState({page:"LandingPage",score:0,user:"",slideIndex: 0})
   }
+
+  handleChange = (value) => {
+    this.setState({
+      slideIndex: value,
+    });
+  };
 
   render() {
     let page = null;
-    if(this.state.page==="LandingPage"){
+    if(this.state.page==="LandingPage"||this.state.slideIndex===0){
       page = <LandingPage onStartgame={this.onStartgame}/> ;
-    }else if (this.state.page==="QuizPage") {
+    }else if (this.state.page==="QuizPage"||this.state.slideIndex===1) {
       page = <QuizPage quizFinished={this.quizFinished}
         questionArr={this.state.questionArr} />
-    }else if(this.state.page==="ScorePage"){
+    }else if(this.state.page==="ScorePage"||this.state.slideIndex===2){
       page = <ScorePage
         user={this.state.user}
         score={this.state.score}
@@ -65,8 +87,28 @@ constructor(props){
 
     return (
       <MuiThemeProvider>
-      <div className='App'>
-        {page}
+        <div className='App'>
+          <div>
+            <Tabs   onChange={this.handleChange}  value={this.state.slideIndex}  >
+              <Tab label="Start" value={0} />
+              <Tab label="Quiz time" value={1} />
+              <Tab label="Leader Board" value={2} />
+            </Tabs>
+
+            <SwipeableViews    index={this.state.slideIndex}  onChangeIndex={this.handleChange}  >
+              <div>
+                <h2 style={styles.headline}></h2>
+                {page}
+              </div>
+              <div   style={styles.headline}>
+                {page}
+              </div>
+              <div style={styles.headline}>
+                {page}
+              </div>
+            </SwipeableViews>
+          </div>
+
       </div>
     </MuiThemeProvider>
     );
