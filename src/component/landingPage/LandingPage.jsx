@@ -13,18 +13,18 @@ constructor(props){
   this.state={user:'',
     value:null
   };
+  
 }
+
 
 handleChange = (event, index, value) => this.setState({value});
 
 
   render () {
     let toggleconfig=null;
-
-    const style = {
+    const style ={
       'backgroundColor':'#FFA726',
       'textAlign':'center',
-      'paddingRight':'0px'
     }
 
       toggleconfig=(
@@ -32,10 +32,8 @@ handleChange = (event, index, value) => this.setState({value});
         <input className="form-control text-center" type="text"      placeholder="Enter user name or enter as guest" onChange={(e)=>this.setState({user:e.target.value})} required/>
         <input className="form-control btn-success" type="submit"    defaultValue="Start Quiz"/>
 
-        <RaisedButton label="Start Quiz" backgroundColor='#66BB6A'  fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame(this.state.user)}}  />
-        {/*<RaisedButton label="Start Quiz" backgroundColor='#66BB6A'  fullWidth={true} onClick={(e)=>{e.preventDefault();this.setState({user:e.target.value});this.props.onStartgame(this.state.user)}}  />*/}
         <RaisedButton label="Guest" backgroundColor='#FFA726' fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame("Guest")}} />
-          <Card  style={style} >
+            <Card style={style}  className='style-override' >
               <CardHeader
                 title="Options"
                 actAsExpander={true}
@@ -58,6 +56,7 @@ handleChange = (event, index, value) => this.setState({value});
                     <MenuItem value={5} primaryText="Art" />
                   </SelectField>
                 </div>
+
                 <div>
                  <Slider defaultValue={0.5} />
                </div>

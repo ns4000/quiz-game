@@ -10,7 +10,7 @@ class QuizPage extends React.Component {
       score:0,
     }
     this.handleValidate= this.handleValidate.bind(this);
-    this.prog= this.prog.bind(this);
+    this.handleProgressBar= this.handleProgressBar.bind(this);
   }
 
 
@@ -31,7 +31,7 @@ handleValidate(answer){
   }
 }
 
- prog() {
+ handleProgressBar() {
   if(this.state.question - 1 === 0) {return null}
   else {
   return  (this.state.question - 1) * 10 + "%"
@@ -50,7 +50,7 @@ handleValidate(answer){
           </div>
           <div className="progress ">
             <div className="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow={this.state.question*10} aria-valuemin="0" aria-valuemax="100" style={divStyle}>
-              <span>{this.prog()}</span>
+              <span>{this.handleProgressBar()}</span>
             </div>
           </div>
           <div className="card-footer text-muted">

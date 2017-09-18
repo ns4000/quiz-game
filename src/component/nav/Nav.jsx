@@ -2,6 +2,8 @@ import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import LandingPage from "../landingPage/LandingPage.jsx";
+import QuizPage from "../quizPage/QuizPage.jsx";
+import './nav.css';
 
 const styles = {
   headline: {
@@ -39,7 +41,7 @@ class nav extends React.Component {
         <SwipeableViews   index={this.state.slideIndex}  onChangeIndex={this.handleChange}  >
           <div>
             <h2 style={styles.headline}></h2>
-            <LandingPage />
+            <LandingPage onStartgame={this.props.onStartgame}/>
           </div>
           <div style={styles.slide}>
 
