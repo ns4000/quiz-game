@@ -25,10 +25,13 @@ class App extends Component {
 constructor(props){
   super(props);
     this.state = {
-      user:'null',
+      user:'',
       page:'LandingPage',
       score:0,
       slideIndex: 0,
+      diffeculty:"easy",
+      questionNum:10,
+       catagories:"",
       questionArr:[]
       }
 
@@ -39,6 +42,7 @@ constructor(props){
     }
 
   onStartgame(user) {
+
     fetch('https://opentdb.com/api.php?amount=10&type=boolean&encode=url3986')
     .then((response)=>response.json())
     .then((json)=>{
@@ -46,8 +50,11 @@ constructor(props){
         e.question= unescape(e.question);
         return e;
       });
+      if(user===""){
+        this.setState({user:"Guest",page:"QuizPage",questionArr:questionArr,slideIndex: 1});
+      }else{
       this.setState({user:user,page:"QuizPage",questionArr:questionArr,slideIndex: 1});
-
+}
 
     })
   }

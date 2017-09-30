@@ -29,10 +29,10 @@ handleChange = (event, index, value) => this.setState({value});
 
       toggleconfig=(
        <form className="form-control" onSubmit={(e)=>{e.preventDefault();this.props.onStartgame(this.state.user)}}>
-        <input className="form-control text-center" type="text"      placeholder="Enter user name or enter as guest" onChange={(e)=>this.setState({user:e.target.value})} required/>
+        <input className="form-control text-center" type="text"      placeholder="Enter user name or enter as guest" onChange={(e)=>this.setState({user:e.target.value})} />
         <input className="form-control btn-success" type="submit"    defaultValue="Start Quiz"/>
 
-        <RaisedButton label="Guest" backgroundColor='#FFA726' fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame("Guest")}} />
+    {/*    <RaisedButton label="Guest" backgroundColor='#FFA726' fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame("Guest")}} />*/}
             <Card style={style}  className='style-override' >
               <CardHeader
                 title="Options"
