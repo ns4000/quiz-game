@@ -17,7 +17,7 @@ constructor(props){
 }
 
 
-handleChange = (event, index, value) => this.setState({value});
+handleChange = (event, index, value) => {this.setState({value}),this.props.handleOptionChange(event.target.innerText)};
 
 
   render () {
@@ -32,7 +32,6 @@ handleChange = (event, index, value) => this.setState({value});
         <input className="form-control text-center" type="text"      placeholder="Enter user name or enter as guest" onChange={(e)=>this.setState({user:e.target.value})} />
         <input className="form-control btn-success" type="submit"    defaultValue="Start Quiz"/>
 
-    {/*    <RaisedButton label="Guest" backgroundColor='#FFA726' fullWidth={true} onClick={(e)=>{e.preventDefault();this.props.onStartgame("Guest")}} />*/}
             <Card style={style}  className='style-override' >
               <CardHeader
                 title="Options"
@@ -41,13 +40,14 @@ handleChange = (event, index, value) => this.setState({value});
               />
               <CardText expandable={true}>
                 <CardActions>
-                  <RaisedButton  label="Easy"  primary={true}/>
-                  <RaisedButton  label="Medium" secondary={true}/>
-                  <RaisedButton  label="Hard" />
+                  <RaisedButton  label="Easy"  primary={true} onClick={(e)=>this.props.handleDiffeculty("easy")}/>
+                  <RaisedButton  label="Medium" secondary={true}
+                  onClick={(e)=>this.props.handleDiffeculty("Medium")}/>
+                  <RaisedButton  label="Hard" onClick={(e)=>this.props.handleDiffeculty("Hard")}/>
                 </CardActions>
                 <div>
                   <SelectField   floatingLabelText="Catagories"
-                     value={this.state.value}
+                      value={this.state.value}
                       onChange={this.handleChange} >
                     <MenuItem value={1} primaryText="Film" />
                     <MenuItem value={2} primaryText="Music" />
@@ -58,7 +58,7 @@ handleChange = (event, index, value) => this.setState({value});
                 </div>
 
                 <div>
-                 <Slider defaultValue={0.5} />
+                 <Slider min={0} max={50} step={1} defaultValue={10} onChange={this.props.handleFirstSlider} />
                </div>
 
               </CardText>

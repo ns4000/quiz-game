@@ -17,7 +17,7 @@ const styles = {
     marginBottom: 12,
     fontWeight: 400,
   },
-  slide: {  padding: 10,},
+  slide: {padding: 10}
 };
 
 class App extends Component {
@@ -31,7 +31,7 @@ constructor(props){
       slideIndex: 0,
       diffeculty:"easy",
       questionNum:10,
-       catagories:"",
+      catagories:"",
       questionArr:[]
       }
 
@@ -39,11 +39,15 @@ constructor(props){
       this.quizFinished=this.quizFinished.bind(this);
       this.tryAgain=this.tryAgain.bind(this);
       this.newGame=this.newGame.bind(this);
+      this.handleOptionChange= this.handleOptionChange.bind(this);
+      this.handleDiffeculty=this.handleDiffeculty.bind(this);
+      this.handleFirstSlider=this.handleFirstSlider.bind(this);
     }
 
   onStartgame(user) {
-
-    fetch('https://opentdb.com/api.php?amount=10&type=boolean&encode=url3986')
+    let num = JSON.stringify(this.state.questionNum);
+    console.log(typeof(num));
+    fetch('https://opentdb.com/api.php?amount='+num+'&type=boolean&encode=url3986')
     .then((response)=>response.json())
     .then((json)=>{
     let questionArr=  json.results.map((e)=>{
@@ -53,11 +57,24 @@ constructor(props){
       if(user===""){
         this.setState({user:"Guest",page:"QuizPage",questionArr:questionArr,slideIndex: 1});
       }else{
-      this.setState({user:user,page:"QuizPage",questionArr:questionArr,slideIndex: 1});
-}
+        this.setState({user:user,page:"QuizPage",questionArr:questionArr,slideIndex: 1});
+        }
 
     })
   }
+
+  handleFirstSlider(event,value){
+    this.setState({questionNum:value});
+  }
+
+  handleDiffeculty(diffeculty){
+    this.setState({diffeculty})
+  }
+
+
+  handleOptionChange(catagories,diffeculty){
+    this.setState({catagories:catagories})
+  };
 
   quizFinished(e){
     this.setState({score:e,page:"ScorePage",slideIndex: 2})
@@ -79,10 +96,12 @@ constructor(props){
   render() {
     let page = null;
     if(this.state.page==="LandingPage"||this.state.slideIndex===0){
-      page = <LandingPage onStartgame={this.onStartgame}/> ;
+      page = <LandingPage onStartgame={this.onStartgame} handleOptionChange={this.handleOptionChange} handleDiffeculty={this.handleDiffeculty}
+      handleFirstSlider={this.handleFirstSlider}/>;
+
     }else if (this.state.page==="QuizPage"||this.state.slideIndex===1) {
-      page = <QuizPage quizFinished={this.quizFinished}
-        questionArr={this.state.questionArr} />
+      page = <QuizPage quizFinished={this.quizFinished} questionArr={this.state.questionArr} questionNum={this.state.questionNum}/>
+
     }else if(this.state.page==="ScorePage"||this.state.slideIndex===2){
       page = <ScorePage
         user={this.state.user}
@@ -96,18 +115,18 @@ constructor(props){
       <MuiThemeProvider>
         <div className='App'>
           <div>
-            <Tabs   onChange={this.handleChange}  value={this.state.slideIndex}  >
-              <Tab label="Start" value={0} />
-              <Tab label="Quiz time" value={1} />
+            <Tabs  onChange={this.handleChange}  value={this.state.slideIndex}  >
+              <Tab label="Start"        value={0} />
+              <Tab label="Quiz time"    value={1} />
               <Tab label="Leader Board" value={2} />
             </Tabs>
 
-            <SwipeableViews    index={this.state.slideIndex}  onChangeIndex={this.handleChange}  >
+            <SwipeableViews index={this.state.slideIndex}  onChangeIndex={this.handleChange}  >
               <div>
                 <h2 style={styles.headline}></h2>
                 {page}
               </div>
-              <div   style={styles.headline}>
+              <div  style={styles.headline}>
                 {page}
               </div>
               <div style={styles.headline}>
