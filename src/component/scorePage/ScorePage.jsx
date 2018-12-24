@@ -23,7 +23,7 @@ handleLeaderBoard(){
       let temp =JSON.parse(localStorage.getItem("leaderBoard"));
       if(temp.length>0){//when we have more than 2 row in the leader board sort them by high score then clip them by 5 rows max
          temp.push(leaderBoardObj);
-         temp.sort(function (a, b) {return b.score - a.score});
+         temp.sort( (a, b)=> {return b.score - a.score});
          let temp1= temp.slice(0,5);
          localStorage.setItem("leaderBoard",JSON.stringify(temp1));
         }
@@ -61,7 +61,7 @@ render() {
           <div className="card">
             <div className="card-block">
               <h3 className="card-title">Your Score:</h3>
-              <p className="card-text text-danger" id="scoreText"><span>{this.props.score}</span>/10</p>
+                <p className="card-text text-danger" id="scoreText"><span>{this.props.score}</span>/10</p>
             </div>
           </div>
         </div>
@@ -101,6 +101,6 @@ render() {
     </div>
   )
 }
-};
+}
 
 export default ScorePage;

@@ -62,6 +62,6 @@ handleValidate(answer){
 
     )
   }
-};
+}
 
 export default QuizPage;
