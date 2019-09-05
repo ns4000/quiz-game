@@ -54,14 +54,14 @@ handleValidate(answer){
             </div>
           </div>
           <div className="card-footer text-muted">
-            <button type="button" className="btn btn-primary btn-lg" id="rightbtn" onClick={(e)=>this.handleValidate(true)}>Right <i className="fa fa-check" aria-hidden="true"/></button>
-            <button type="button" className="btn btn-danger btn-lg" onClick={(e)=>this.handleValidate(false)}>Wrong                <i className="fa fa-times" aria-hidden="true"/></button>
+            <button type="button" className="btn btn-primary btn-lg" id="rightbtn" onClick={()=>this.handleValidate(true)}>Right <i className="fa fa-check" aria-hidden="true"/></button>
+            <button type="button" className="btn btn-danger btn-lg" onClick={()=>this.handleValidate(false)}>Wrong                <i className="fa fa-times" aria-hidden="true"/></button>
           </div>
       </div>
 
 
     )
   }
-};
+}
 
 export default QuizPage;

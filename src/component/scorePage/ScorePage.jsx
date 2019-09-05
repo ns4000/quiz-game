@@ -35,7 +35,7 @@ handleLeaderBoardComponent(){
 let leaderBoardObj = JSON.parse(localStorage.getItem("leaderBoard"));
 let tempcom = leaderBoardObj.map((userleader,index)=>{
   return (
-              <tr>
+              <tr key={index}>
                 <th scope="row">{index+1}</th>
                 <td>{userleader.user}</td>
                 <td>{userleader.score}/10</td>
@@ -47,7 +47,7 @@ return  tempcom;
 
 }
 
-componentWillMount() {
+UNSAVE_componentWillMount() {
 this.handleLeaderBoard();
 
 }
@@ -101,6 +101,6 @@ render() {
     </div>
   )
 }
-};
+}
 
 export default ScorePage;
