@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import PropTypes from 'prop-types';
 import './App.css';
 
 import LandingPage from '../landingPage/LandingPage.jsx';
@@ -31,7 +32,7 @@ constructor(props){
       slideIndex: 0,
       diffeculty:"easy",
       questionNum:10,
-       catagories:"",
+      catagories:"",
       questionArr:[]
       }
 
@@ -51,9 +52,9 @@ constructor(props){
         return e;
       });
       if(user===""){
-        this.setState({user:"Guest",page:"QuizPage",questionArr:questionArr,slideIndex: 1});
+        this.setState({user:"Guest",page:"QuizPage",questionArr,slideIndex: 1});
       }else{
-      this.setState({user:user,page:"QuizPage",questionArr:questionArr,slideIndex: 1});
+      this.setState({user,page:"QuizPage",questionArr,slideIndex: 1});
 }
 
     })
@@ -103,8 +104,7 @@ constructor(props){
             </Tabs>
 
             <SwipeableViews    index={this.state.slideIndex}  onChangeIndex={this.handleChange}  >
-              <div>
-                <h2 style={styles.headline}></h2>
+              <div style={styles.headline}>
                 {page}
               </div>
               <div   style={styles.headline}>
@@ -122,4 +122,8 @@ constructor(props){
   }
 }
 
+App.protoTypes = {
+  onStartgame: PropTypes.func
+
+}
 export default App;
